@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import { styled } from "@mui/system";
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { Typography } from '@mui/material';
 
 export const CommonContainer = styled(Box)({
@@ -24,7 +24,7 @@ export const CommonAlertWrapper = styled(Stack)({
    top: "110px",
 })
 
-export const CategotyCard = styled(Box)({
+export const CategoryCard = styled(Box)({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -70,4 +70,25 @@ export const CardTextBold = styled(Typography)({
     fontSize: 25,
     fontWeight: "bold",
     textAlign: "center",
+ })
+
+ export const WideButton = styled(Button)({
+    width: 200,
+    height: 80
+ })
+
+ export const SingleConstructorLetter = styled(Box)({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 80,
+    height: 80,
+    fontSize: 40,
+    cursor: "pointer",
+    borderRadius: 15,
+    backgroundColor: "#1565C0",
+    transition: ".5s ease",
+    "&:hover": {
+       color: "#FFFFFF",
+    }
  })

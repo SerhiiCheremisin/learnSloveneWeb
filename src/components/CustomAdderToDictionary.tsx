@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { IRootDictionary } from '../utils/types';
 import { setUserDictionary } from '../redux/slices/appStoorage';
 import Button from '@mui/material/Button';
+
 import useGetUserDictionary from '../services/hooks/useGetUserDictionary';
 import useCommonDispatch from '../services/hooks/useCommonDispatch';
-
 
 interface ICustomAdderToDictionaryProps {
    singleWord: IRootDictionary
@@ -13,23 +13,23 @@ interface ICustomAdderToDictionaryProps {
 type commandsType = "add" | "delete";
 
 const CustomAdderToDictionary = ( { singleWord } :ICustomAdderToDictionaryProps ):JSX.Element => {
-  const [isInDictionary, setIsinDictionary] = useState<boolean>(false);
+  const [isInDictionary, setIsInDictionary] = useState<boolean>(false);
   const dictionary = useGetUserDictionary();
   const dispatch = useCommonDispatch();
 
    useEffect( () => {
     dictionary.userDictionary.map( (word : IRootDictionary) => {
-        if (singleWord.category === word.sloWord) {
-            setIsinDictionary(true);
+        if (singleWord.sloWord === word.sloWord) {
+            setIsInDictionary(true);
         }
     })
    })
 // setting word to dictionary goes wrong
   const wordAdderHandler = (command: commandsType):void => {
      if (command === "add") {
-        setIsinDictionary(true);
-        dispatch(setUserDictionary([...dictionary.userDictionary, ...[singleWord]]));
-        localStorage.setItem( "userDictionary", JSON.stringify([...dictionary.userDictionary, [singleWord]]));
+        setIsInDictionary(true);
+        dispatch(setUserDictionary([...dictionary.userDictionary, singleWord]));
+        localStorage.setItem( "userDictionary", JSON.stringify([...dictionary.userDictionary, singleWord]));
         return
      }
      const filteredDictionary = [...dictionary.userDictionary].filter( (word: IRootDictionary) => {
@@ -37,7 +37,7 @@ const CustomAdderToDictionary = ( { singleWord } :ICustomAdderToDictionaryProps 
      })
      dispatch(setUserDictionary(filteredDictionary));
      localStorage.setItem( "userDictionary", JSON.stringify(filteredDictionary));
-     setIsinDictionary(false);
+     setIsInDictionary(false);
      return
   }
 

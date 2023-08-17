@@ -15,7 +15,9 @@ export interface IGrammarInitial {
 }
 //other
 export type userType = "new" | "old";
+export type grammarType = "adDeclension" | "beAndHave" | "nounDeclension" | "prefix" | "imperativeMood" | "none";
 
+export type trainingType = "training" | "constructor";
 export interface IUserObject {
     name: string,
     password: string
@@ -46,9 +48,34 @@ export interface ILocalStorageData {
 export interface INounDeclensionHeaders {
     nounsTitle: string[]
 }
+
+export interface IImperativweMood {
+    ruleUkr: string 
+    ruleEn: string 
+    example: string
+}
 interface ISIngleNoun {
     questions : string,
     ukrName: string
+}
+
+export interface IChangeFormCommon {
+    ukr: string,
+    eng: string
+}
+
+export interface IBeAndHaveRules {
+    head: {
+        ukr : string[],
+        eng: string[]
+    },
+    body: string[][]
+}
+
+export interface IChangeFormsParticularCases {
+    exampleUkr: string,
+    exampleEng: string,
+    cases: IChangeFormCommon[]
 }
 export interface INounQuestions {
     nominative : ISIngleNoun,

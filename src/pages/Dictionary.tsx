@@ -6,19 +6,16 @@ import { CommonContainer } from '../utils/styles/commonStyles';
 import { Typography } from '@mui/material';
 import { baseDictionary } from '../services/rootDictionary';
 import { IRootDictionary } from '../utils/types';
-import { CategotyCard, SingleWordCard, CardText, CardTextBold } from '../utils/styles/commonStyles';
+import { CategoryCard, SingleWordCard, CardText, CardTextBold } from '../utils/styles/commonStyles';
 import Button from '@mui/material/Button';
-import useCommonDispatch from '../services/hooks/useCommonDispatch';
-import useGetUserDictionary from '../services/hooks/useGetUserDictionary';
-import { setUserDictionary } from '../redux/slices/appStoorage';
+import useCheckAfterRefresh from '../services/hooks/useCheckAfterRefresh';
 
 const Dicrionary = () => {
   const [categories, setCategories] = useState<string[]> ([]);
   const [activeCategory, setActiveCategory] = useState<string>('');
   const [wordList, setWordList] = useState<IRootDictionary[]>([]);
-  const dictionary = useGetUserDictionary();
-  
-  const dispatch = useCommonDispatch();
+
+  const doCheck = useCheckAfterRefresh();
 
   useEffect ( () => {
     const categories = baseDictionary.map( (el:IRootDictionary) => {
@@ -27,10 +24,7 @@ const Dicrionary = () => {
     const uniqueCategories = new Set(categories);
     const uniqueArray: string[] = Array.from(uniqueCategories);
     setCategories(uniqueArray);
-    if (localStorage.getItem("userDictionary")) {
-      const localDictionary = JSON.parse(localStorage.getItem("userDictionary") || '[]');
-      dispatch(setUserDictionary(localDictionary));
-    }
+    doCheck();
   },[])
 
   const userData = useGetUserData();
@@ -56,7 +50,7 @@ const Dicrionary = () => {
         <CommonContainer sx={{flexWrap: 'wrap', gap: "30px", marginTop: "50px"}}>
         { categories.map( (el:string) => {
           return (
-            <CategotyCard key={el} onClick={() => makeActiveCategoty(el)}>{`${el}`}</CategotyCard>
+            <CategoryCard key={el} onClick={() => makeActiveCategoty(el)}>{`${el}`}</CategoryCard>
           )
         }) }
         </CommonContainer>
@@ -66,7 +60,7 @@ const Dicrionary = () => {
 
   return (
     <CommonContainer sx={{flexDirection: "column", padding: "50px 0px"}}>
-        <Button onClick={() => setActiveCategory('')} variant="outlined">Назад</Button>
+        <Button sx={{width:"150px", height: "50px", backgroundColor: "red"}} onClick={() => setActiveCategory('')} variant="outlined">Назад</Button>
         <CommonContainer sx={{flexWrap: 'wrap', gap: "30px", marginTop: "50px"}}>
       { wordList.map( (word:IRootDictionary) => {
         return (

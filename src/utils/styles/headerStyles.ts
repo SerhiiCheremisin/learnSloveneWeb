@@ -2,24 +2,6 @@ import AppBar from "@mui/material/AppBar";
 import Link from "@mui/material/Link";
 import { styled } from "@mui/system";
 
-export const CustomLink = styled(Link)({
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width:"150px",
-    height:"40px",
-    fontSize: 20,
-    backgroundColor: "black",
-    borderRadius: "25px",
-    color: "#ffffff",
-    transition: ".5s ease",
-    transform: "scale(1)",
-    cursor: "pointer",
-    "&:hover" : {
-      transform: "scale(1.1)"
-    }
-  }) 
-
   export const CustomHeader = styled(AppBar)({
    flexDirection: "row",
    height: "100px",
