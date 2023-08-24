@@ -7,19 +7,23 @@ import { Typography } from '@mui/material';
 import useCheckAfterRefresh from '../services/hooks/useCheckAfterRefresh';
 import useCommonDispatch from '../services/hooks/useCommonDispatch';
 import { setUserDictionary } from '../redux/slices/appStoorage';
+import useGetUserData from '../services/hooks/useGetUserData';
+import { addWordToDictionatyToDB } from '../utils/API';
 
 const UserDicrionary = () => {
 
   const dictionary = useGetUserDictionary();
   const checkAfterRefresh = useCheckAfterRefresh();
   const dispatch = useCommonDispatch();
+  const user = useGetUserData();
   
  const deleteHandler = (word:IRootDictionary ): void => {
    const newState = [...dictionary.userDictionary].filter( (key:IRootDictionary) => key.sloWord !== word.sloWord);
-   localStorage.setItem( "userDictionary", JSON.stringify(newState));
-   dispatch(setUserDictionary(newState));
+   addWordToDictionatyToDB(newState, user.name).then( () => {
+    localStorage.setItem( "userDictionary", JSON.stringify(newState));
+    dispatch(setUserDictionary(newState));
+   })
  }
-
   useEffect( () => {
     checkAfterRefresh();
   }, [])

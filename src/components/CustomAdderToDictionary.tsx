@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { IRootDictionary } from '../utils/types';
 import { setUserDictionary } from '../redux/slices/appStoorage';
 import Button from '@mui/material/Button';
+import { addWordToDictionatyToDB } from '../utils/API';
 
 import useGetUserDictionary from '../services/hooks/useGetUserDictionary';
 import useCommonDispatch from '../services/hooks/useCommonDispatch';
+import useGetUserData from '../services/hooks/useGetUserData';
 
 interface ICustomAdderToDictionaryProps {
    singleWord: IRootDictionary
 }
-
 type commandsType = "add" | "delete";
 
 const CustomAdderToDictionary = ( { singleWord } :ICustomAdderToDictionaryProps ):JSX.Element => {
   const [isInDictionary, setIsInDictionary] = useState<boolean>(false);
   const dictionary = useGetUserDictionary();
+  const user = useGetUserData();
   const dispatch = useCommonDispatch();
 
    useEffect( () => {
@@ -24,20 +26,24 @@ const CustomAdderToDictionary = ( { singleWord } :ICustomAdderToDictionaryProps 
         }
     })
    })
-// setting word to dictionary goes wrong
+
   const wordAdderHandler = (command: commandsType):void => {
      if (command === "add") {
-        setIsInDictionary(true);
-        dispatch(setUserDictionary([...dictionary.userDictionary, singleWord]));
-        localStorage.setItem( "userDictionary", JSON.stringify([...dictionary.userDictionary, singleWord]));
+       addWordToDictionatyToDB( [...dictionary.userDictionary, singleWord], user.name).then( () =>{
+         setIsInDictionary(true);
+         dispatch(setUserDictionary([...dictionary.userDictionary, singleWord]));
+         localStorage.setItem( "userDictionary", JSON.stringify([...dictionary.userDictionary, singleWord]));
+       })
         return
      }
      const filteredDictionary = [...dictionary.userDictionary].filter( (word: IRootDictionary) => {
-        return word.sloWord === singleWord.sloWord;
+        return word.sloWord !== singleWord.sloWord;
      })
-     dispatch(setUserDictionary(filteredDictionary));
-     localStorage.setItem( "userDictionary", JSON.stringify(filteredDictionary));
-     setIsInDictionary(false);
+     addWordToDictionatyToDB( filteredDictionary , user.name).then( () => {
+      dispatch(setUserDictionary(filteredDictionary));
+      localStorage.setItem( "userDictionary", JSON.stringify(filteredDictionary));
+      setIsInDictionary(false);
+     })
      return
   }
 

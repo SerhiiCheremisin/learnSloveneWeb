@@ -13,6 +13,8 @@ export interface IDictionaryInitial {
 export interface IGrammarInitial {
     activeGrammarBlock: string
 }
+
+
 //other
 export type userType = "new" | "old";
 export type grammarType = "adDeclension" | "beAndHave" | "nounDeclension" | "prefix" | "imperativeMood" | "none";
@@ -42,6 +44,13 @@ export interface ILocalStorageData {
     userName: string,
     userPassword: string;
     userDictionary: IRootDictionary[]
+}
+
+export interface IAPIRoutes {
+    addUser: String,
+    findAllUsers: String,
+    addNewWord: String,
+    findOneUser: String
 }
 
 // grammar
