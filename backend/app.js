@@ -5,11 +5,12 @@ const http = require('http');
 const ws = require('ws');
 const mongoose = require('mongoose');
 const userModel = require('./models');
+require('dotenv').config();
 
 const app = express();
 const router = express.Router()
 
-const mongoURL = "mongodb+srv://Serhii:NDqcfarzp3fqDYIp@cluster0.vxtbj.mongodb.net/sloVac?retryWrites=true&w=majority";
+const mongoURL = `${process.env.API_URL_WITH_KEY}`;
 const corsOptions = {
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",

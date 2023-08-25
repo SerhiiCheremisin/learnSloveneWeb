@@ -631,7 +631,7 @@ export const baseDictionary:IRootDictionary[] =  [
     {sloWord: 'konec', ukrWord: 'кінець', isIrregular: false, category: 'Час, числа, орієнтація'},
     {sloWord: 'mesec', ukrWord: 'місяць (як супутник так і тривалість часу)', isIrregular: false, category: 'Час, числа, орієнтація'},
     {sloWord: 'koledar', ukrWord: 'рік', isIrregular: false, category: 'Час, числа, орієнтація'},
-    {sloWord: 'leto', ukrWord: 'велосипед', isIrregular: false, category: 'Час, числа, орієнтація'},
+    {sloWord: 'leto', ukrWord: 'літо', isIrregular: false, category: 'Час, числа, орієнтація'},
     {sloWord: 'kdaj', ukrWord: 'коли', isIrregular: false, category: 'Час, числа, орієнтація'},
     {sloWord: 'miljarda', ukrWord: 'мільярд', isIrregular: false, category: 'Час, числа, орієнтація'},
     {sloWord: 'sever', ukrWord: 'північ', isIrregular: false, category: 'Час, числа, орієнтація'},

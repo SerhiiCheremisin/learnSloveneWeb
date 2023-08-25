@@ -4,19 +4,20 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "mongoServer": "nodemon app.js"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "mongoServer": "nodemon app.js"
     },
     "author": "Serhii Cheremisin <sebanho@gmail.com>",
     "license": "ISC",
     "dependencies": {
-      "cors": "^2.8.5",
-      "express": "^4.17.3",
-      "mongodb": "^4.5.0",
-      "mongoose": "^6.6.0",
-      "multer": "^1.4.4",
-      "nodemon": "^2.0.15",
-      "websocket": "^1.0.34",
-      "ws": "^8.8.1"
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.17.3",
+        "mongodb": "^4.5.0",
+        "mongoose": "^6.6.0",
+        "multer": "^1.4.4",
+        "nodemon": "^2.0.15",
+        "websocket": "^1.0.34",
+        "ws": "^8.8.1"
     }
-  }
+}
