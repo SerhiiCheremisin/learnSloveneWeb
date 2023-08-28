@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import useGetUserData from '../services/hooks/useGetUserData';
 import CustomAdderToDictionary from '../components/CustomAdderToDictionary';
+import Loader from '../components/Loader';
 
 import { CommonContainer } from '../utils/styles/commonStyles';
 import { Typography } from '@mui/material';
@@ -9,11 +10,13 @@ import { IRootDictionary } from '../utils/types';
 import { CategoryCard, SingleWordCard, CardText, CardTextBold } from '../utils/styles/commonStyles';
 import Button from '@mui/material/Button';
 import useCheckAfterRefresh from '../services/hooks/useCheckAfterRefresh';
+import { customBackground, returnBTNSolid } from '../utils/styles/commonStyles';
 
 const Dicrionary = () => {
   const [categories, setCategories] = useState<string[]> ([]);
   const [activeCategory, setActiveCategory] = useState<string>('');
   const [wordList, setWordList] = useState<IRootDictionary[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const doCheck = useCheckAfterRefresh();
 
@@ -25,6 +28,7 @@ const Dicrionary = () => {
     const uniqueArray: string[] = Array.from(uniqueCategories);
     setCategories(uniqueArray);
     doCheck();
+    setIsLoading(false);
   },[])
 
   const userData = useGetUserData();
@@ -35,9 +39,13 @@ const Dicrionary = () => {
     setActiveCategory(categoty);
   } 
 
+  if (isLoading) {
+    return <Loader/>
+  }
+   
   if (!userData.isLogged) {
     return (
-      <CommonContainer sx={{backgroundImage: "url('/images/slovenia-flag.jpg')", backgroundRepeat: "no-repeat", backgroundSize: "cover", height: "89.2vh"}}>
+      <CommonContainer sx={[{backgroundImage: "url('/images/slovenia-flag.jpg')", backgroundRepeat: "no-repeat", backgroundSize: "cover", height: "89.2vh"}, customBackground]}>
       <Typography variant="h2" component="h2">Ви маєте зареєструватися, щоб користуватися словником</Typography>
       </CommonContainer>
     )
@@ -45,7 +53,7 @@ const Dicrionary = () => {
 
   if (activeCategory === '') {
     return (
-      <CommonContainer sx={{flexDirection: "column", padding: "50px 0px"}}>
+      <CommonContainer sx={[{flexDirection: "column", padding: "50px 0px"}, customBackground]}>
         <Typography variant="h2" component="h2">Словник</Typography>
         <CommonContainer sx={{flexWrap: 'wrap', gap: "30px", marginTop: "50px"}}>
         { categories.map( (el:string) => {
@@ -59,8 +67,8 @@ const Dicrionary = () => {
   }
 
   return (
-    <CommonContainer sx={{flexDirection: "column", padding: "50px 0px"}}>
-        <Button sx={{width:"150px", height: "50px", backgroundColor: "red"}} onClick={() => setActiveCategory('')} variant="outlined">Назад</Button>
+    <CommonContainer sx={[{flexDirection: "column", padding: "50px 0px"}, customBackground]}>
+        <Button sx={[{width:"200px", height: "50px"}, returnBTNSolid]} onClick={() => setActiveCategory('')} variant="outlined">Назад</Button>
         <CommonContainer sx={{flexWrap: 'wrap', gap: "30px", marginTop: "50px"}}>
       { wordList.map( (word:IRootDictionary) => {
         return (

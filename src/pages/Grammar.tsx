@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { grammarType } from '../utils/types';
 import { CategoryCard, CommonContainer, CommonHorizontalContainer } from '../utils/styles/commonStyles';
 import useCheckAfterRefresh from '../services/hooks/useCheckAfterRefresh';
-import { WideButton } from '../utils/styles/commonStyles';
+import { WideButton, returnBNTLinear, returnBTNSolid } from '../utils/styles/commonStyles';
+import { customBackground } from '../utils/styles/commonStyles';
 
 import NounDeclension from '../components/grammar/NounDeclension';
 import VerbDeclension from '../components/grammar/VerbDeclension';
@@ -24,43 +25,43 @@ const Grammar = () => {
  const ReturnButton = (): JSX.Element => {
   return (
     <>
-    <WideButton onClick={() => setActiveGrammar("none")} sx={{width: 300}}>Назад</WideButton>
+    <WideButton onClick={() => setActiveGrammar("none")} sx={[{width: 200, height: 50, margin: 5}, returnBTNSolid]}>Назад</WideButton>
     </>
   ) }
  
  if (activeGrammar === "adDeclension") return(
-  <CommonHorizontalContainer>
+  <CommonHorizontalContainer sx={returnBNTLinear}>
    <ReturnButton/>
    <VerbDeclension/>
   </CommonHorizontalContainer>
  )
  if (activeGrammar === "nounDeclension") return(
-  <CommonHorizontalContainer>
+  <CommonHorizontalContainer sx={returnBNTLinear}>
    <ReturnButton/>
    <NounDeclension/>
   </CommonHorizontalContainer>
  )
  if (activeGrammar === "prefix") return(
-  <CommonHorizontalContainer>
+  <CommonHorizontalContainer sx={returnBNTLinear}>
    <ReturnButton/>
    <ChangeFormOvWord/>
   </CommonHorizontalContainer>
  )
  if (activeGrammar === "beAndHave") return(
-  <CommonHorizontalContainer>
+  <CommonHorizontalContainer sx={returnBNTLinear}>
    <ReturnButton/>
    <ToBe/>
   </CommonHorizontalContainer>
  )
  if (activeGrammar === "imperativeMood") return(
-  <CommonHorizontalContainer>
+  <CommonHorizontalContainer sx={returnBNTLinear}>
    <ReturnButton/>
    <ImperativeMood/>
   </CommonHorizontalContainer>
  )
 
   return (
-    <CommonContainer sx={{marginTop: 15, gap: 20, flexWrap: "wrap"}}>
+    <CommonContainer sx={[{paddingTop: 15, gap: 20, flexWrap: "wrap", minHeight: "89vh"}, customBackground]}>
       <CategoryCard onClick={() => activeGrammarHandler("adDeclension")} sx={{width: 500}}>Відмінювання дієслів</CategoryCard>
       <CategoryCard onClick={() => activeGrammarHandler("beAndHave")} sx={{width: 500}}>Дієслово "БУТИ" та "МАТИ" </CategoryCard>
       <CategoryCard onClick={() => activeGrammarHandler("nounDeclension")} sx={{width: 500}}>Відмінювання іменників</CategoryCard>

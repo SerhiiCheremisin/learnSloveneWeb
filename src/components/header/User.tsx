@@ -116,7 +116,7 @@ let errorBordersHandler = isDataEmpty === true ? true : false;
    if (userDetails.isLogged) {
     return (
         <CommonContainer sx={{gap:5}}>
-        <Typography variant="h3">{`Привіт, ${userDetails.name}`}</Typography>
+        <Typography sx={{color: "black"}} variant="h3">{`Привіт, ${userDetails.name}`}</Typography>
         <Link to="/user-dictionary"><WideButton sx={[{height:"50px"}, {backgroundColor: setCustomBG('/user-dictionary')}]} variant="contained">Обрані слова</WideButton></Link>
         <WideButton sx={{height:"50px"}} onClick={logoutHandler} variant="contained">Вийти</WideButton>
         </CommonContainer>

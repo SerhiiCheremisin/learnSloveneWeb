@@ -4,6 +4,7 @@ import useGetUserDictionary from "../../services/hooks/useGetUserDictionary";
 import { IRootDictionary } from "../../utils/types";
 import SingleLetter from "./SingleLetter";
 import { WideButton } from "../../utils/styles/commonStyles";
+import Loader from "../Loader";
 
 import { CommonHorizontalContainer, CommonContainer } from "../../utils/styles/commonStyles";
 import { Typography } from "@mui/material";
@@ -15,6 +16,7 @@ const WordConstructor = ():JSX.Element => {
     const [letterCount, setLetterCount] = useState<number>(0);
     const [answer, setAnswer] = useState<string>("");
     const dictionary = useGetUserDictionary();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const setShuffle = ():void => {
         const shuffeled = doShuffle(dictionary.userDictionary);
@@ -23,6 +25,7 @@ const WordConstructor = ():JSX.Element => {
 
     useEffect( () => {
         setShuffle();
+        setIsLoading(false);
      }, [])
 
     const resetHandler = ():void => {
@@ -32,6 +35,10 @@ const WordConstructor = ():JSX.Element => {
     useEffect( () => {
         setAnswer(shuffeledArray[pace]?.sloWord.slice(0, letterCount));
     }, [letterCount])
+
+    if (isLoading) {
+        return <Loader/>
+    }
 
      if (shuffeledArray.length === pace) {
         return (

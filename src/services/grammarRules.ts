@@ -78,11 +78,11 @@ export const verbDeclension: string[][] = [
 
 
  export const imperativeMood: IImperativweMood[] = [
-    { ruleUkr: "povabiti (запросити)", ruleEn: "povabiti (to invite)", example: " -im -> -i"},
-    { ruleUkr: "prodati (продати)", ruleEn: "prodati (to sell)", example: "-am -> -aj"},
-    { ruleUkr: "kazati (показати)", ruleEn: "kazati (to show)", example: "-em -> -i"},
-    { ruleUkr: "potovati (подорожувати)", ruleEn: "potovati (to travel)", example: "(u)jem -> -j"},
-    { ruleUkr: "teči (бігати)", ruleEn: "teči (to run)", example: " -čem -> -ci"}
+    { ruleUkr: "povabiti (запросити)", ruleEn: "povabiti (to invite)", example: " -im → -i"},
+    { ruleUkr: "prodati (продати)", ruleEn: "prodati (to sell)", example: "-am → -aj"},
+    { ruleUkr: "kazati (показати)", ruleEn: "kazati (to show)", example: "-em → -i"},
+    { ruleUkr: "potovati (подорожувати)", ruleEn: "potovati (to travel)", example: "(u)jem → -j"},
+    { ruleUkr: "teči (бігати)", ruleEn: "teči (to run)", example: " -čem → -ci"}
  ]
 
  export const imperativeMoodIrregulars: IImperativweMood[] = [
@@ -183,8 +183,8 @@ export const verbDeclension: string[][] = [
 
  export const beAndHaveRules: IBeAndHaveRules = {
     head: {
-        ukr: ["BITI (Бути)", "Негативна форма", "IMETI (Мати)", "Негативна форма"],
-        eng: ["BITI (Бути)", "", ", "]
+        ukr: ["", "BITI (Бути)", "Негативна форма", "IMETI (Мати)", "Негативна форма"],
+        eng: ["","BITI (Бути)", "", ", "]
     },
     body: [
         ["Jaz", "sem", "nisem", "imam", "nimam"], 

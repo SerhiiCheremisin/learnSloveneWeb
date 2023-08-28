@@ -5,6 +5,7 @@ import { CommonContainer, CommonHorizontalContainer } from '../utils/styles/comm
 import { trainingType } from '../utils/types';
 import useCheckAfterRefresh from '../services/hooks/useCheckAfterRefresh';
 import { WideButton } from '../utils/styles/commonStyles';
+import { customBackground } from '../utils/styles/commonStyles';
 
 import WordConstructor from '../components/training/WordConstructor';
 import WordGame from '../components/training/WordGame';
@@ -46,14 +47,14 @@ const Training = () => {
 
   if (dictionary.userDictionary.length < 10) {
     return (
-      <CommonContainer>
+      <CommonContainer sx={[{paddingTop: 15}, customBackground]}>
       <Typography variant="h2" component="h2">Замало слів у словнику, щоб почати тренування. Необхідний мінімум - 10 слів</Typography>
       </CommonContainer>
     )
   }
   return (
-    <CommonHorizontalContainer>
-      <CommonContainer sx={{gap: 15, marginTop: 5}}>
+    <CommonHorizontalContainer sx={[{minHeight: "89vh"}, customBackground]}>
+      <CommonContainer sx={{gap: 15, position: "absolute", top: "150px"}}>
       <WideButton sx={setActiveTabClass("training")} variant="contained" value="training" onClick={() => tabHandler("training")}>Тренування</WideButton>
       <WideButton sx={setActiveTabClass("constructor")} variant="contained" value="constructor" onClick={() => tabHandler("constructor")}>Конструктор слів</WideButton>
       </CommonContainer>

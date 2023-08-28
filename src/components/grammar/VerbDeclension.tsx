@@ -7,19 +7,21 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-const VerbDeclension = () : JSX.Element =>{
+import { tableStyles, tableFontSize } from "../../utils/styles/commonStyles";
+
+const VerbDeclension = () : JSX.Element => {
 
 
     return (
          <>
        <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={tableStyles} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>{verbDeclension[0][0]}</TableCell>
-            <TableCell align="center">{verbDeclension[0][1]} </TableCell>
-            <TableCell align="center">{verbDeclension[0][2]}</TableCell>
-            <TableCell align="center">{verbDeclension[0][3]}</TableCell>
+            <TableCell sx={tableFontSize} align="center">{verbDeclension[0][0]}</TableCell>
+            <TableCell sx={tableFontSize} align="center">{verbDeclension[0][1]} </TableCell>
+            <TableCell sx={tableFontSize} align="center">{verbDeclension[0][2]}</TableCell>
+            <TableCell sx={tableFontSize} align="center">{verbDeclension[0][3]}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -29,7 +31,7 @@ const VerbDeclension = () : JSX.Element =>{
              }
              return <TableRow key={id}>
                 { el.map( (item:string) => {
-                    return <TableCell align="center">{item}</TableCell>
+                    return <TableCell sx={tableFontSize} align="center">{item}</TableCell>
                 }) }
              </TableRow>
           }) }

@@ -9,6 +9,7 @@ import useCommonDispatch from '../services/hooks/useCommonDispatch';
 import { setUserDictionary } from '../redux/slices/appStoorage';
 import useGetUserData from '../services/hooks/useGetUserData';
 import { addWordToDictionatyToDB } from '../utils/API';
+import { customBackground } from '../utils/styles/commonStyles';
 
 const UserDicrionary = () => {
 
@@ -29,7 +30,7 @@ const UserDicrionary = () => {
   }, [])
 
   return (
-    <CommonContainer sx={{marginTop: 15, gap:10, flexWrap: "wrap"}}>
+    <CommonContainer sx={[{paddingTop: 15, gap:10, flexWrap: "wrap"}, customBackground]}>
       { dictionary.userDictionary.map( (word:IRootDictionary) => {
             return(
               <SingleWordCard key={word.sloWord}>

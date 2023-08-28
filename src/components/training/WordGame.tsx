@@ -5,6 +5,7 @@ import { doShuffle } from "../../services/functions";
 import { Button, Typography } from "@mui/material";
 import { CommonHorizontalContainer, CommonContainer } from "../../utils/styles/commonStyles";
 import WordGameItem from "./WordGameItem";
+import Loader from "../Loader";
 
 
 const WordGame = ():JSX.Element => {
@@ -14,6 +15,7 @@ const [incorrect, setIncorrect] = useState<number>(0);
 const [shuffeledArray, setShuffeledArray] = useState<IRootDictionary[]>([]);
 const [answers, setAnswers] = useState<IRootDictionary[]>([]);
 const dictionary = useGetUserDictionary();
+const [isLoading, setIsLoading] = useState<boolean>(true);
 
 const makeAnswers = () => {
     const filteredArray = [...dictionary.userDictionary].filter( (word:IRootDictionary) => word.sloWord !== shuffeledArray[step]?.sloWord);
@@ -27,6 +29,7 @@ const makeAnswers = () => {
    useEffect( () => {
     const shuffeled = doShuffle(dictionary.userDictionary);
     setShuffeledArray(shuffeled);
+    setIsLoading(false);
  }, [])
 
  useEffect( () => {
@@ -44,6 +47,11 @@ const makeAnswers = () => {
  useEffect ( () => {
     makeAnswers();
  }, [step])
+    
+    if (isLoading) {
+        return <Loader/>
+    }
+
     if (step === 10) {
         return (
             <CommonHorizontalContainer sx={{marginTop: 15}}>
@@ -57,7 +65,7 @@ const makeAnswers = () => {
     return (
         <CommonHorizontalContainer sx={{marginTop: 15}}>
         <Typography variant="h2" component="h2">{shuffeledArray[step]?.sloWord.toUpperCase()}</Typography>
-        <CommonContainer sx={{gap: 10}}>
+        <CommonContainer sx={{gap: 10, marginTop:10}}>
         { answers.map( (el:IRootDictionary, id:number) => {
               return <WordGameItem key={id} word={el} setStep={setStep} setCorrect={setCorrect} setIncorrect = {setIncorrect} step={step} shuffeledArray={shuffeledArray}/>
          }) }

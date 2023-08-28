@@ -15,7 +15,7 @@ interface IWordGameItemProps {
 const WordGameItem = ( { word, setStep, setCorrect, setIncorrect, shuffeledArray, step } : IWordGameItemProps) => {
 
    const[customBG, setCustomBG] = useState<object>({
-    backgroundColor: ""
+    backgroundColor: "white"
    });
    const [needToReset, setNeedToReset] = useState<boolean>(false);
 
@@ -24,7 +24,7 @@ const WordGameItem = ( { word, setStep, setCorrect, setIncorrect, shuffeledArray
         setTimeout( () => {
             setStep( (prev:number) => { return prev + 1 });
             setCustomBG({
-                backgroundColor: ""
+                backgroundColor: "white"
             });
             setNeedToReset(false);
         }, 1000)
