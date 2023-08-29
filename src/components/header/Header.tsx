@@ -16,7 +16,7 @@ const Header = ():JSX.Element => {
 
 const setCustomBG = (url:string):string => {
   if (location.pathname === url) {
-    return "gray"
+    return "green"
   }
   return ""
  }

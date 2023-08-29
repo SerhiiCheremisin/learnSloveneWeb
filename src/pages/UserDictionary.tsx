@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { WideButton, CommonContainer } from '../utils/styles/commonStyles';
+import { WideButton, CommonContainer, CommonHorizontalContainer } from '../utils/styles/commonStyles';
 import useGetUserDictionary from '../services/hooks/useGetUserDictionary';
 import { SingleWordCard } from '../utils/styles/commonStyles';
 import { IRootDictionary } from '../utils/types';
@@ -10,6 +10,8 @@ import { setUserDictionary } from '../redux/slices/appStoorage';
 import useGetUserData from '../services/hooks/useGetUserData';
 import { addWordToDictionatyToDB } from '../utils/API';
 import { customBackground } from '../utils/styles/commonStyles';
+
+import WordAdder from '../components/WordAdder';
 
 const UserDicrionary = () => {
 
@@ -30,7 +32,9 @@ const UserDicrionary = () => {
   }, [])
 
   return (
-    <CommonContainer sx={[{paddingTop: 15, gap:10, flexWrap: "wrap"}, customBackground]}>
+    <CommonHorizontalContainer sx={customBackground}>
+      <WordAdder/>
+    <CommonContainer sx={{paddingTop: 15, gap:10, flexWrap: "wrap"}}>
       { dictionary.userDictionary.map( (word:IRootDictionary) => {
             return(
               <SingleWordCard key={word.sloWord}>
@@ -41,6 +45,7 @@ const UserDicrionary = () => {
             )
                    }) }
     </CommonContainer>
+    </CommonHorizontalContainer>
   )
 }
 

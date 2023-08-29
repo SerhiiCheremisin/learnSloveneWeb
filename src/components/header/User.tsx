@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { WideButton } from "../../utils/styles/commonStyles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sendNewUserToDB, findAlUsersFromDB, findOneUserFromDB } from "../../utils/API";
+import useGetUserDictionary from "../../services/hooks/useGetUserDictionary";
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -31,6 +32,7 @@ const User = ():JSX.Element => {
      }, 3000)
    },[isDataEmpty] )
    const navigate = useNavigate();
+   const dictionary = useGetUserDictionary();
 
   const userFormHandler = (e:React.ChangeEvent<any>, key: userDataType):void => {
    const value = e.target.value;
@@ -39,7 +41,7 @@ const User = ():JSX.Element => {
 
  const setCustomBG = (url:string):string => {
    if (location.pathname === url) {
-     return "gray"
+     return "green"
    }
    return ""
   }
@@ -117,8 +119,9 @@ let errorBordersHandler = isDataEmpty === true ? true : false;
     return (
         <CommonContainer sx={{gap:5}}>
         <Typography sx={{color: "black"}} variant="h3">{`Привіт, ${userDetails.name}`}</Typography>
-        <Link to="/user-dictionary"><WideButton sx={[{height:"50px"}, {backgroundColor: setCustomBG('/user-dictionary')}]} variant="contained">Обрані слова</WideButton></Link>
-        <WideButton sx={{height:"50px"}} onClick={logoutHandler} variant="contained">Вийти</WideButton>
+        { dictionary.userDictionary.length !== 0 &&
+         <Link to="/user-dictionary"><WideButton sx={[{height:"50px"}, {backgroundColor: setCustomBG('/user-dictionary')}]} variant="contained">Обрані слова</WideButton></Link> }
+         <WideButton sx={{height:"50px"}} onClick={logoutHandler} variant="contained">Вийти</WideButton>
         </CommonContainer>
        )
    }

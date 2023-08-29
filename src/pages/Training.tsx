@@ -47,7 +47,7 @@ const Training = () => {
 
   if (dictionary.userDictionary.length < 10) {
     return (
-      <CommonContainer sx={[{paddingTop: 15}, customBackground]}>
+      <CommonContainer sx={[{paddingTop: 15, minHeight: "89vh"}, customBackground]}>
       <Typography variant="h2" component="h2">Замало слів у словнику, щоб почати тренування. Необхідний мінімум - 10 слів</Typography>
       </CommonContainer>
     )
