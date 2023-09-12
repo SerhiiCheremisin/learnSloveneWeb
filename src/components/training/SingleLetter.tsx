@@ -4,12 +4,14 @@ import { SingleConstructorLetter } from "../../utils/styles/commonStyles"
 interface ISingleLetterProps {
   letter: string,
   word: string,
-  setPace: Function,
+  setPace: React.Dispatch<React.SetStateAction<number>>,
   letterIndex: number,
-  setLetterIndex: Function
+  setLetterIndex: React.Dispatch<React.SetStateAction<number>>,
+  setCurrentWord: React.Dispatch<React.SetStateAction<string[]>>,
+  currentWord: string[]
 }
 
-const SingleLetter = ( { letter, word, setPace, letterIndex, setLetterIndex }:ISingleLetterProps ):JSX.Element => {
+const SingleLetter = ( { letter, word, setPace, letterIndex, setLetterIndex, setCurrentWord, currentWord }:ISingleLetterProps ):JSX.Element => {
   const [customBG, setCustomBG] = useState<object>({
     backgroundColor: ""
   });
@@ -28,6 +30,14 @@ const SingleLetter = ( { letter, word, setPace, letterIndex, setLetterIndex }:IS
         setCustomBG({
             backgroundColor: ""
         });
+        const index = [...currentWord].findIndex( item => item === letter);
+        const newState = [...currentWord].map( (item:string, idx: number) => {
+          if (idx ===index ) {
+            return ""
+          }
+          return item
+        })
+        setCurrentWord(newState);
         setLetterIndex( (prev:number) => { return prev + 1});
      }, 1000)
    }
@@ -55,7 +65,7 @@ const SingleLetter = ( { letter, word, setPace, letterIndex, setLetterIndex }:IS
 
     return(
         <SingleConstructorLetter onClick={answerCheckHandler} sx={customBG}>
-          {letter}
+          {letter.toLocaleUpperCase()}
         </SingleConstructorLetter>
     )
 }

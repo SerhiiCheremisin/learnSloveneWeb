@@ -47,7 +47,7 @@ const WordGameItem = ( { word, setStep, setCorrect, setIncorrect, shuffeledArray
     setIncorrect( (prev:number) =>  {return  prev+1 });
    }
 
-    return <WideButton onClick={() => buttonHandler(word)} sx={customBG} variant="outlined" key={word?.sloWord}>{ word?.ukrWord.toUpperCase() }</WideButton>
+    return <WideButton onClick={() => buttonHandler(word)} sx={[{color:"black"},customBG]} variant="contained" key={word?.sloWord}>{ word?.ukrWord.toUpperCase() }</WideButton>
 }
 
 export default WordGameItem;

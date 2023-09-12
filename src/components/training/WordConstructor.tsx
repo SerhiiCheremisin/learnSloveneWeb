@@ -17,6 +17,7 @@ const WordConstructor = ():JSX.Element => {
     const [answer, setAnswer] = useState<string>("");
     const dictionary = useGetUserDictionary();
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [currentWord, setCurrentWord] = useState<string[]>([]);
 
     const setShuffle = ():void => {
         const shuffeled = doShuffle(dictionary.userDictionary);
@@ -27,6 +28,11 @@ const WordConstructor = ():JSX.Element => {
         setShuffle();
         setIsLoading(false);
      }, [])
+  
+  useEffect( () => {
+    setCurrentWord(shuffeledArray[pace]?.sloWord.split("").sort(() => Math.random() - 0.5));
+    setAnswer(shuffeledArray[pace]?.ukrWord);
+  },[shuffeledArray, pace])
 
     const resetHandler = ():void => {
         setShuffle();
@@ -48,19 +54,19 @@ const WordConstructor = ():JSX.Element => {
             </CommonHorizontalContainer>
         )
      }
-let checkAnswer = answer === undefined ? "" : answer
 
     return (
         <CommonHorizontalContainer sx={{marginTop: 15}}>
          <Typography variant="h2" component="h2">{shuffeledArray[pace]?.ukrWord.toUpperCase()}</Typography>
-         <CommonContainer sx={{border: "1px solid black", width: 600, height: 150}}>
-         <Typography variant="h4" component="h4">{`${checkAnswer}`}</Typography>
+         <CommonContainer sx={{border: "1px solid black", width: 600, height: 150, backgroundColor: "white", marginTop: 5}}>
+         <Typography variant="h4" component="h4">{answer && `${answer.slice(0, letterCount).toUpperCase()}`}</Typography>
          </CommonContainer>
          <CommonContainer sx={{marginTop: 15, gap: 5}}>
-          { shuffeledArray[pace]?.sloWord.split("").sort(() => Math.random() - 0.5).map( (el:string) => {
+          { currentWord && currentWord.map( (el:string) => {
              return (
                 <>
-                 <SingleLetter key={el} letter={el} word={shuffeledArray[pace]?.sloWord} setPace={setPace} letterIndex={letterCount} setLetterIndex={setLetterCount} />
+                 <SingleLetter key={el} letter={el} word={shuffeledArray[pace]?.sloWord} setPace={setPace}
+                   letterIndex={letterCount} setLetterIndex={setLetterCount} setCurrentWord={setCurrentWord}  currentWord={currentWord}/>
                 </>
              )
           }) }
