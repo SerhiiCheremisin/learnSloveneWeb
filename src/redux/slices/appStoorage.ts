@@ -4,7 +4,8 @@ import { IUserSliceInitial } from "../../utils/types";
 const initialState: IUserSliceInitial = {
    isUserLogged : false,
    userName: '',
-   userDictionary: []
+   userDictionary: [],
+   appLang: "UA"
 }
 
 const appStoorage = createSlice({
@@ -19,10 +20,13 @@ const appStoorage = createSlice({
           },
           setUserDictionary (state, action) {
             state.userDictionary = action.payload;   
+          },
+          setAppLanguage (state, action) {
+            state.appLang = action.payload;
           }
         }
 })
 
-export const { setUserName, setUserLoginStatus, setUserDictionary } = appStoorage.actions;
+export const { setUserName, setUserLoginStatus, setUserDictionary, setAppLanguage } = appStoorage.actions;
 
 export default appStoorage.reducer;

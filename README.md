@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 In the beckend directory, you can run:
 
-### `npm run mobgoServer`
+### `npm run mongoServer`
 
 Runs the app in the beckend
 Open [http://localhost:3300](http://localhost:3300) to view it in the browser.

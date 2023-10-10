@@ -9,16 +9,22 @@ import { Link } from "react-router-dom";
 import { WideButton } from "../../utils/styles/commonStyles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sendNewUserToDB, findAlUsersFromDB, findOneUserFromDB } from "../../utils/API";
+
 import useGetUserDictionary from "../../services/hooks/useGetUserDictionary";
+import useGetAppLanguage from "../../services/hooks/useGetAppLanguage";
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
 
 const User = ():JSX.Element => {
    const userDetails = useGetUserData(); 
    const dispatch = useCommonDispatch();
    const [userType, setUserType] = useState<userType>("new");
-   const buttonActionType = userType === "new" ? "Зареєструватися" : "Увійти";
+   const appLanguage = useGetAppLanguage();
+   const buttonActionType = () => userType === "new" ? "Зареєструватися" : "Увійти";
+   const buttonActionTypeEng = () => userType === "new" ? "To register" : "Log in";
+
    const [userData, setUserData] = useState<IUserObject> ( {
     name: "",
     password: ""
@@ -76,7 +82,7 @@ const User = ():JSX.Element => {
       .then( (data) => {
          const check = data.find( (element:any) => element.userName === userData.name );
          if (check) {
-            alert(`Такий юзер вже існує, вигадайте унікальніше ім'я`);
+            alert(appLanguage === "UA" ? "Такий користувач вже існує, вигадайте унікальніше ім'я" : "Such username already exists, please, pick another name");
             return
          } else {
             sendNewUserToDB(newUserData)
@@ -99,7 +105,7 @@ const User = ():JSX.Element => {
                return
             }
          }
-         alert(`Якіcь данні не збігаються`)
+         alert(appLanguage === "UA" ? "Якіcь данні не збігаються" : "Some data is incorrect")
       })
       return
     }
@@ -118,10 +124,11 @@ let errorBordersHandler = isDataEmpty === true ? true : false;
    if (userDetails.isLogged) {
     return (
         <CommonContainer sx={{gap:5}}>
-        <Typography sx={{color: "black"}} variant="h3">{`Привіт, ${userDetails.name}`}</Typography>
+        <Typography sx={{color: "black"}} variant="h3">{appLanguage === "UA" ? `Привіт, ${userDetails.name}` : `Hello, ${userDetails.name}`}</Typography>
         { dictionary.userDictionary.length !== 0 &&
-         <Link to="/user-dictionary"><WideButton sx={[{height:"50px"}, {backgroundColor: setCustomBG('/user-dictionary')}]} variant="contained">Обрані слова</WideButton></Link> }
-         <WideButton sx={{height:"50px"}} onClick={logoutHandler} variant="contained">Вийти</WideButton>
+         <Link to="/user-dictionary"><WideButton sx={[{height:"50px"}, {backgroundColor: setCustomBG('/user-dictionary')}]} variant="contained">
+                                                {appLanguage === "UA" ? "Ваш словник" : "Your dictionary"}</WideButton></Link> }
+         <WideButton sx={{height:"50px"}} onClick={logoutHandler} variant="contained">{appLanguage === "UA" ? "Вийти" : "Log out"}</WideButton>
         </CommonContainer>
        )
    }
@@ -130,20 +137,22 @@ let errorBordersHandler = isDataEmpty === true ? true : false;
     <>
     <CommonContainer sx={{gap:15}}>
     <CommonContainer>
-    <TextField error={errorBordersHandler} id="formName" onChange={(e) => userFormHandler(e, "name")} value={userData.name} label="Логін" variant="outlined" />
-    <TextField error={errorBordersHandler} id="formPassword" onChange={(e) => userFormHandler(e, "password")}  value={userData.password} label="Пароль" variant="outlined" />
+    <TextField error={errorBordersHandler} id="formName" onChange={(e) => userFormHandler(e, "name")} value={userData.name} 
+               label={appLanguage === "UA" ? "Логін" : "Username"} variant="outlined" />
+    <TextField error={errorBordersHandler} id="formPassword" onChange={(e) => userFormHandler(e, "password")} 
+               value={userData.password} label={appLanguage === "UA" ? "Пароль" : "Password"} variant="outlined" />
     </CommonContainer>
     <CommonHorizontalContainer sx={{gap:2}}>
     <ButtonGroup variant="contained" aria-label="outlined primary button group">
-      <Button onClick={() => choseTypeOfUser("new")} disabled={isNewUser}>Новий користувач</Button>
-      <Button onClick={() => choseTypeOfUser("old")} disabled={!isNewUser}>Вже є аккаунт</Button>
+      <Button onClick={() => choseTypeOfUser("new")} disabled={isNewUser}>{appLanguage === "UA" ? "Новий користувач" : "New User"}</Button>
+      <Button onClick={() => choseTypeOfUser("old")} disabled={!isNewUser}>{appLanguage === "UA" ? "Вже є аккаунт" : "I have an account"}</Button>
     </ButtonGroup>
-    <Button onClick={formHandler} variant="contained">{`${buttonActionType}`}</Button>
+    <Button onClick={formHandler} variant="contained">{appLanguage === "UA" ? buttonActionType() : buttonActionTypeEng()}</Button>
     </CommonHorizontalContainer>
    </CommonContainer>
     {isDataEmpty &&  
         <CommonAlertWrapper>
-        <Alert severity="warning">{`Всі поля мають бути заповнені`}</Alert>
+        <Alert severity="warning">{appLanguage === "UA" ? "Всі поля мають бути заповнені" : "All fields should be filled"}</Alert>
         </CommonAlertWrapper>}
     </>
    )

@@ -1,9 +1,12 @@
 
 //redux
+
+export type appLanguage =  "UA" | "ENG"
 export interface IUserSliceInitial {
     isUserLogged : boolean,
     userName: string,
     userDictionary: IRootDictionary[]
+    appLang: appLanguage
 }
 
 export interface IDictionaryInitial {
@@ -37,7 +40,9 @@ export interface IRootDictionary {
     irregulars? : IIrregularVerbs,
     sloWord: string,
     ukrWord: string,
-    category: string
+    engWord: string,
+    category: string,
+    categoryEng: string
 }
 
 export interface ILocalStorageData {
@@ -61,11 +66,15 @@ export interface INounDeclensionHeaders {
 export interface IImperativweMood {
     ruleUkr: string 
     ruleEn: string 
-    example: string
+    example: string,
+    fullExample?: string
 }
+
 interface ISIngleNoun {
     questions : string,
-    ukrName: string
+    questionEng: string,
+    ukrName: string,
+    engName: string
 }
 
 export interface IChangeFormCommon {

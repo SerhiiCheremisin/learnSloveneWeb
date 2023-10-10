@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
 import { WideButton } from "../../utils/styles/commonStyles";
 import { IRootDictionary } from "../../utils/types";
-import { Step } from '@mui/material';
+
+import useGetAppLanguage from '../../services/hooks/useGetAppLanguage';
 
 interface IWordGameItemProps {
     word : IRootDictionary,
     step: number,
-    setStep: Function,
-    setCorrect: Function,
-    setIncorrect: Function,
+    setStep: React.Dispatch<React.SetStateAction<number>>,
+    setCorrect: React.Dispatch<React.SetStateAction<number>>,
+    setIncorrect: React.Dispatch<React.SetStateAction<number>>,
     shuffeledArray : IRootDictionary[]
 }
 
 const WordGameItem = ( { word, setStep, setCorrect, setIncorrect, shuffeledArray, step } : IWordGameItemProps) => {
 
+   const appLanguage = useGetAppLanguage();
    const[customBG, setCustomBG] = useState<object>({
     backgroundColor: "white"
    });
@@ -32,6 +34,7 @@ const WordGameItem = ( { word, setStep, setCorrect, setIncorrect, shuffeledArray
    },[needToReset])
 
    const buttonHandler = ( value: IRootDictionary ) => {
+
      if (shuffeledArray[step].ukrWord === value.ukrWord) {
         setCustomBG( {
             backgroundColor: "green"
@@ -47,7 +50,8 @@ const WordGameItem = ( { word, setStep, setCorrect, setIncorrect, shuffeledArray
     setIncorrect( (prev:number) =>  {return  prev+1 });
    }
 
-    return <WideButton onClick={() => buttonHandler(word)} sx={[{color:"black"},customBG]} variant="contained" key={word?.sloWord}>{ word?.ukrWord.toUpperCase() }</WideButton>
+    return <WideButton onClick={() => buttonHandler(word)} sx={[{color:"black"},customBG]} variant="contained" key={word?.sloWord}>{appLanguage === "UA" ? 
+                                word?.ukrWord.toUpperCase() : word?.engWord.toUpperCase() }</WideButton>
 }
 
 export default WordGameItem;

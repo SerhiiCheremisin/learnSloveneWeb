@@ -30,9 +30,9 @@ const SingleLetter = ( { letter, word, setPace, letterIndex, setLetterIndex, set
         setCustomBG({
             backgroundColor: ""
         });
-        const index = [...currentWord].findIndex( item => item === letter);
+        const index = [...currentWord].indexOf(letter);
         const newState = [...currentWord].map( (item:string, idx: number) => {
-          if (idx ===index ) {
+          if (idx === index ) {
             return ""
           }
           return item

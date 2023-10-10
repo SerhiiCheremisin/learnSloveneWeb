@@ -12,7 +12,7 @@ export const AddWordBotton = styled(Button)({
 
 export const ModalAdder = styled(Box)({
   width: 700,
-  height:500,
+  height:550,
   backgroundColor: "white",
   zIndex: 22,
   position: "absolute",

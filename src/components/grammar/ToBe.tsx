@@ -1,5 +1,6 @@
 import { CommonHorizontalContainer } from "../../utils/styles/commonStyles";
 import Typography from '@mui/material/Typography';
+import useGetAppLanguage from "../../services/hooks/useGetAppLanguage";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,24 +14,29 @@ import { beAndHaveRules, beInTheFuture } from "../../services/grammarRules";
 import { returnBNTLinear, tableStyles , tableFontSize } from "../../utils/styles/commonStyles";
 
 const ToBe = () :JSX.Element => {
+  const appLanguage = useGetAppLanguage();
+  const currentLanguage = appLanguage === "UA" ? beAndHaveRules.head.ukr : beAndHaveRules.head.eng;
     return(
         <CommonHorizontalContainer>
-         <Typography variant="h3" style={{paddingBottom: 10}}>ДІЄСЛОВА БУТИ ТА МАТИ (ПОЗИТИВНА ТА НЕГАТИВНА ФОРМА ДЛЯ ТЕПЕРІШНЬОГО ТА МИНУЛОГО ЧАСУ)</Typography>
+         <Typography variant="h3" style={{paddingBottom: 10}}>{
+          appLanguage === "UA" ? "ДІЄСЛОВА БУТИ ТА МАТИ (ПОЗИТИВНА ТА НЕГАТИВНА ФОРМА ДЛЯ ТЕПЕРІШНЬОГО ТА МИНУЛОГО ЧАСУ)" 
+          : "VERBS TO BE AND TO HAVE (POSITIVE AND NEGATIVE FORM FOR THE PRESENT AND PAST TENSES)"
+         }</Typography>
          <TableContainer component={Paper}>
          <Table sx={tableStyles} aria-label="simple table">
         <TableHead>
           <TableRow>
-              { beAndHaveRules.head.ukr.map( (el:string) => {
-              return <TableCell sx={tableFontSize} key={el} align="center">{el}</TableCell>
+              { currentLanguage.map( (el:string, idx:number) => {
+              return <TableCell sx={tableFontSize} key={idx} align="center">{el}</TableCell>
             }) }
           </TableRow>
         </TableHead>
         <TableBody>
-          { beAndHaveRules.body.map( (el:string[]) => {
+          { beAndHaveRules.body.map( (el:string[], idx:number) => {
             return (
-              <TableRow>
-                { el.map( (el:string) => {
-                  return   <TableCell key={el} sx={tableFontSize} align="center">{el}</TableCell>
+              <TableRow key={idx}>
+                { el.map( (el:string, id:number) => {
+                  return   <TableCell key={id} sx={tableFontSize} align="center">{el}</TableCell>
                 }) }
               </TableRow>
             )
@@ -38,7 +44,10 @@ const ToBe = () :JSX.Element => {
         </TableBody>
       </Table>
     </TableContainer>
-      <Typography variant="h3" style={{paddingBottom: 10, paddingTop: 15}}>ДІЄСЛОВО БУТИ (ПОЗИТИВНА ТА НЕГАТИВНА ФОРМА ДЛЯ МАЙБУТНЬОГО)</Typography>
+      <Typography variant="h3" style={{paddingBottom: 10, paddingTop: 15}}>
+        {appLanguage === "UA" ? "ДІЄСЛОВО БУТИ (ПОЗИТИВНА ТА НЕГАТИВНА ФОРМА ДЛЯ МАЙБУТНЬОГО)" 
+        : "VERB TO BE (POSITIVE AND NEGATIVE FORM FOR THE FUTURE)"}
+      </Typography>
       <TableContainer component={Paper}>
       <Table sx={tableStyles} aria-label="simple table">
         <TableBody>

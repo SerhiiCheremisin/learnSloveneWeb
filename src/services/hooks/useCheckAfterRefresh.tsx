@@ -1,8 +1,6 @@
 import useCommonDispatch from "./useCommonDispatch";
 import { setUserLoginStatus, setUserName, setUserDictionary } from "../../redux/slices/appStoorage";
 
-
-
 const useCheckAfterRefresh = () => {
 
     const dispatch = useCommonDispatch();

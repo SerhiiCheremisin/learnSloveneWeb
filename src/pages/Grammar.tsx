@@ -4,6 +4,7 @@ import { CategoryCard, CommonContainer, CommonHorizontalContainer } from '../uti
 import useCheckAfterRefresh from '../services/hooks/useCheckAfterRefresh';
 import { WideButton, returnBNTLinear, returnBTNSolid } from '../utils/styles/commonStyles';
 import { customBackground } from '../utils/styles/commonStyles';
+import useGetAppLanguage from '../services/hooks/useGetAppLanguage';
 
 import NounDeclension from '../components/grammar/NounDeclension';
 import VerbDeclension from '../components/grammar/VerbDeclension';
@@ -14,6 +15,7 @@ import ImperativeMood from '../components/grammar/ImperativeMood';
 const Grammar = () => {
  const [activeGrammar, setActiveGrammar] = useState<grammarType>("none");
  const checkRefresh = useCheckAfterRefresh();
+ const appLanguage = useGetAppLanguage();
  useEffect(() => {
   checkRefresh();
  }, [])
@@ -25,7 +27,8 @@ const Grammar = () => {
  const ReturnButton = (): JSX.Element => {
   return (
     <>
-    <WideButton onClick={() => setActiveGrammar("none")} sx={[{width: 200, height: 50, margin: 5}, returnBTNSolid]}>Назад</WideButton>
+    <WideButton onClick={() => setActiveGrammar("none")} sx={[{width: 200, height: 50, margin: 5}, returnBTNSolid]}>
+                        {appLanguage === "UA" ? "Назад" : "Go back"} </WideButton>
     </>
   ) }
  
@@ -62,11 +65,11 @@ const Grammar = () => {
 
   return (
     <CommonContainer sx={[{paddingTop: 15, gap: 20, flexWrap: "wrap", minHeight: "89vh"}, customBackground]}>
-      <CategoryCard onClick={() => activeGrammarHandler("adDeclension")} sx={{width: 500}}>Відмінювання дієслів</CategoryCard>
-      <CategoryCard onClick={() => activeGrammarHandler("beAndHave")} sx={{width: 500}}>Дієслово "БУТИ" та "МАТИ" </CategoryCard>
-      <CategoryCard onClick={() => activeGrammarHandler("nounDeclension")} sx={{width: 500}}>Відмінювання іменників</CategoryCard>
-      <CategoryCard onClick={() => activeGrammarHandler("prefix")} sx={{width: 500}}>Зміна значення слів через префікси</CategoryCard>
-      <CategoryCard onClick={() => activeGrammarHandler("imperativeMood")} sx={{width: 500}}>Наказова форма</CategoryCard>
+      <CategoryCard onClick={() => activeGrammarHandler("adDeclension")} sx={{width: 500}}>{appLanguage === "UA" ? "Відмінювання дієслів" : "Conjugation of verbs"}</CategoryCard>
+      <CategoryCard onClick={() => activeGrammarHandler("beAndHave")} sx={{width: 500}}>{appLanguage === "UA" ? "Дієслово 'БУТИ' та 'МАТИ'" : "The verb 'TO BE' and 'TO HAVE'"} </CategoryCard>
+      <CategoryCard onClick={() => activeGrammarHandler("nounDeclension")} sx={{width: 500}}>{appLanguage === "UA" ? "Відмінювання іменників" : "Declension of nouns"}</CategoryCard>
+      <CategoryCard onClick={() => activeGrammarHandler("prefix")} sx={{width: 500}}>{appLanguage === "UA" ? "Зміна значення слів через префікси" : "Changing the meaning of words through prefixes"}</CategoryCard>
+      <CategoryCard onClick={() => activeGrammarHandler("imperativeMood")} sx={{width: 500}}>{appLanguage === "UA" ? "Наказова форма" : "Imperative mood"}</CategoryCard>
     </CommonContainer>
   )
 }

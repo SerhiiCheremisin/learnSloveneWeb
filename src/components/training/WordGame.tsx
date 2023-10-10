@@ -6,6 +6,7 @@ import { Button, Typography } from "@mui/material";
 import { CommonHorizontalContainer, CommonContainer } from "../../utils/styles/commonStyles";
 import WordGameItem from "./WordGameItem";
 import Loader from "../Loader";
+import useGetAppLanguage from "../../services/hooks/useGetAppLanguage";
 
 
 const WordGame = ():JSX.Element => {
@@ -16,6 +17,7 @@ const [shuffeledArray, setShuffeledArray] = useState<IRootDictionary[]>([]);
 const [answers, setAnswers] = useState<IRootDictionary[]>([]);
 const dictionary = useGetUserDictionary();
 const [isLoading, setIsLoading] = useState<boolean>(true);
+const appLanguage = useGetAppLanguage();
 
 const makeAnswers = () => {
     const filteredArray = [...dictionary.userDictionary].filter( (word:IRootDictionary) => word.sloWord !== shuffeledArray[step]?.sloWord);
@@ -55,9 +57,10 @@ const makeAnswers = () => {
     if (step === 10) {
         return (
             <CommonHorizontalContainer sx={{marginTop: 15}}>
-                <Typography variant="h2" component="h2">{'Гра закінчилася'}</Typography>
-                <Typography variant="h2" component="h2">{`У вас ${correct} правильних та ${incorrect} неправильних відповідей`}</Typography>
-                <Button onClick={resetHandler} variant="contained">Почати заново</Button>
+                <Typography variant="h2" component="h2">{appLanguage === "UA" ? "Гра закінчилася" : "The game has ended"}</Typography>
+                <Typography variant="h2" component="h2">{appLanguage === "UA" ? `У вас ${correct} правильних та ${incorrect} неправильних відповідей` 
+                                                                               :`You have ${correct} correct and ${incorrect} wrong answeres` }</Typography>
+                <Button onClick={resetHandler} variant="contained">{appLanguage === "UA" ? "Почати заново" : "Start over"}</Button>
             </CommonHorizontalContainer>
         )
     }

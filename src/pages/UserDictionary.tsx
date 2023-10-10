@@ -10,6 +10,7 @@ import { setUserDictionary } from '../redux/slices/appStoorage';
 import useGetUserData from '../services/hooks/useGetUserData';
 import { addWordToDictionatyToDB } from '../utils/API';
 import { customBackground } from '../utils/styles/commonStyles';
+import useGetAppLanguage from '../services/hooks/useGetAppLanguage';
 
 import WordAdder from '../components/WordAdder';
 
@@ -19,6 +20,7 @@ const UserDicrionary = () => {
   const checkAfterRefresh = useCheckAfterRefresh();
   const dispatch = useCommonDispatch();
   const user = useGetUserData();
+  const appLanguage = useGetAppLanguage();
   
  const deleteHandler = (word:IRootDictionary ): void => {
    const newState = [...dictionary.userDictionary].filter( (key:IRootDictionary) => key.sloWord !== word.sloWord);
@@ -36,11 +38,13 @@ const UserDicrionary = () => {
       <WordAdder/>
     <CommonContainer sx={{paddingTop: 15, gap:10, flexWrap: "wrap"}}>
       { dictionary.userDictionary.map( (word:IRootDictionary) => {
+        if (appLanguage === "UA" && word.ukrWord === "" || appLanguage === "ENG" && word.engWord === "") return null;
             return(
               <SingleWordCard key={word.sloWord}>
                  <Typography variant="h6" gutterBottom>{word.sloWord.toUpperCase()}</Typography>
-                 <Typography variant="h6" gutterBottom>{word.ukrWord.toUpperCase()}</Typography>
-                 <WideButton onClick={() => deleteHandler(word)} sx={{height: 50}} variant="contained" color="error">Видалити зі словника</WideButton>
+                 <Typography variant="h6" gutterBottom>{appLanguage === "UA" ? word.ukrWord.toUpperCase() : word.engWord.toUpperCase()}</Typography>
+                 <WideButton onClick={() => deleteHandler(word)} sx={{height: 50}} variant="contained" color="error">
+                                      {appLanguage === "UA" ? "Видалити зі словника" : "Delete from dictionary"}</WideButton>
               </SingleWordCard>
             )
                    }) }

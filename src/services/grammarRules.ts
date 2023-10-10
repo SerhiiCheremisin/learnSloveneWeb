@@ -7,27 +7,39 @@ export const nounDeclension: INounDeclensionHeaders = {
 export const nounsQuestions: INounQuestions = {
     nominative : {
         questions : "Kdo - хто, kaj - що",
-        ukrName: "Називний"
+        questionEng: "Kdo - who, kaj - what",
+        ukrName: "Називний",
+        engName: "Nominative"
     },
     genitive : {
         questions : "Koga - кого, česa - чого",
-        ukrName: "Родовий"
+        questionEng: "Koga - whom, česa - what",
+        ukrName: "Родовий",
+        engName: "Genitive"
     },
     dative : {
         questions : "Komu - кому, čemu - чому",
-        ukrName: "Давальний"
+        questionEng: "Komu - to whom, čemu - for what",
+        ukrName: "Давальний",
+        engName: "Nominative"
     },
     accusative : {
         questions : "Koga - кого, Kaj - що, Kam - куди",
-        ukrName: "Знахідний"
+        questionEng: "Koga - whom, Kaj - what, Kam - where",
+        ukrName: "Знахідний",
+        engName: "Dative"
     },
     locative : {
         questions : "Z kom - з ким,z čim - з чим",
-        ukrName: "Орудний"
+        questionEng: "Z kom - with whom, z čim - with what",
+        ukrName: "Орудний",
+        engName: "Locative"
     },
     instrumental : {
         questions : "Kje - де, o kom - про кого, o čim - про що",
-        ukrName: "Місцевий"
+        questionEng: "Kje - where, o kom - about whom, o čim - about what",
+        ukrName: "Місцевий",
+        engName: "Instrumental"
     }
 };
 
@@ -76,13 +88,25 @@ export const verbDeclension: string[][] = [
 ["Коли мова йде про групу тільки з жінок **тільки іменники середнього роду", "*Частка 'se' зазначає що дієслово має зворотну форму. (učiti se - навчатися)" ,
  "Умовна форма схожа на укр мову. Додаємо \"bi\" - Jaz bi vedel (я б бачив)  Заперечення формується як і у  теперішьому часі" , ""] ] 
 
+ export const verbDeclensionEng: string[][] = [
+    ["Person", "Present tense (infinitive - 'ti', ( + se* )" , "Past tense (infinitive - 'ti')" , "Future tense (infinitive - 'ti')"],
+    ["Jaz", "m" , "sem + L/La" , "bom + L/La"] , ["Ti", "š" , "si + L/La" , "boš + L/La"], 
+    ["On, Ona, Ono", "-" , "je + L/La" , "bo + L/La"],
+    ["Midva, Midve / Medve", "va" , "sva + La/Li" , "bova + La/Li"] ,["Vidva, Vidve / Vedve", "ta" , "sta + La/Li" , "bosta + La/Li"],
+    ["Onadva, Onidve",  "ta" , "sta + La/Li" , "bosta + La/Li"], 
+    ["Mi, Me", "mo" , "smo + Li/Le" , "bomo + Li/Le"],
+    ["Vi, Ve", "te" , "ste + Li/Le" , "boste + Li/Le"],
+    ["Oni , One* , Ona**", "jo" , "so + Li/Le/La" , "bojo/bodo + Li/Le/La"],
+    ["When it comes to a group of only women **only neuter nouns", "*The part 'se' indicates that the verb has a reflexive form. (učiti se - to learn toyrself)" ,
+     "With conditional form we add \"bi\" - Jaz bi vedel (I would see) The negation is formed as in the present tense" , ""] ] 
+
 
  export const imperativeMood: IImperativweMood[] = [
-    { ruleUkr: "povabiti (запросити)", ruleEn: "povabiti (to invite)", example: " -im → -i"},
-    { ruleUkr: "prodati (продати)", ruleEn: "prodati (to sell)", example: "-am → -aj"},
-    { ruleUkr: "kazati (показати)", ruleEn: "kazati (to show)", example: "-em → -i"},
-    { ruleUkr: "potovati (подорожувати)", ruleEn: "potovati (to travel)", example: "(u)jem → -j"},
-    { ruleUkr: "teči (бігати)", ruleEn: "teči (to run)", example: " -čem → -ci"}
+    { ruleUkr: "povabiti (запросити)", ruleEn: "povabiti (to invite)", example: "-im → -i/ite", fullExample: "povabim → povabi/povabite"},
+    { ruleUkr: "prodati (продати)", ruleEn: "prodati (to sell)", example: "-am → -aj/ajte", fullExample: "prodajam → prodaj/prodajte"},
+    { ruleUkr: "kazati (показати)", ruleEn: "kazati (to show)", example: "-em → -i/ite", fullExample: "kažem → kaži/kažite"},
+    { ruleUkr: "potovati (подорожувати)", ruleEn: "potovati (to travel)", example: "(u)jem → -j/ujte", fullExample: "potujem → potuj/potujte"},
+    { ruleUkr: "teči (бігати)", ruleEn: "teči (to run)", example: "-čem → -ci/cite", fullExample: "tečem → teci/tecite"}
  ]
 
  export const imperativeMoodIrregulars: IImperativweMood[] = [
@@ -105,86 +129,80 @@ export const verbDeclension: string[][] = [
 
 
  export const changeFormCommon : IChangeFormCommon[] = [
-    {ukr: "do - (до)", eng: ""},
-    {ukr: "iz - (від)", eng: ""},
-    {ukr: "na - (на)", eng: ""},
-    {ukr: "o - (про)", eng: ""},
-    {ukr: "ob - (в)", eng: ""},
-    {ukr: "od - (від)", eng: ""},
-    {ukr: "po - (після)", eng: ""},
-    {ukr: "pod - (під)", eng: ""},
-    {ukr: "pre - (теж)", eng: ""},
-    {ukr: "pred - (перед)", eng: ""},
-    {ukr: "pri - (після)", eng: ""},
-    {ukr: "raz - (із)", eng: ""},
-    {ukr: "s - (с)", eng: ""},
-    {ukr: "v - (в)", eng: ""},
-    {ukr: "za - (для)", eng: ""}
+    {ukr: "do - (до)", eng: "do - (to)"},
+    {ukr: "iz - (від)", eng: "iz - (from)"},
+    {ukr: "na - (на)", eng: "na - (at)"},
+    {ukr: "o - (про)", eng: "o - (about)"},
+    {ukr: "ob - (в)", eng: "ob - (in)"},
+    {ukr: "od - (від)", eng: "od - (from)"},
+    {ukr: "po - (після)", eng: "po - (after)"},
+    {ukr: "pod - (під)", eng: "pod - (under)"},
+    {ukr: "pre - (теж)", eng: "pre - (too)"},
+    {ukr: "pred - (перед)", eng: "pred - (before)"},
+    {ukr: "pri - (після)", eng: "pri - (after)"},
+    {ukr: "raz - (із)", eng: "raz - (from)"},
+    {ukr: "s - (с)", eng: "s - (with)"},
+    {ukr: "v - (в)", eng: "v - (in)"},
+    {ukr: "za - (для)", eng: "za - (for)"}
  ]
 
  export const changeFormsParticularCases: IChangeFormsParticularCases[] = [
-    {exampleUkr: "Pisati (писати)", exampleEng: "",  cases: [
-        {ukr: "do + pisati = dopisati (дописати)", eng: ""},
-        {ukr: "iz + pisati = izpisati (виписувати)", eng: ""},
-        {ukr: "na + pisati = napisati (написати)", eng: ""},
-        {ukr: "pod + pisati = podpisati (підписати)", eng: ""},
-        {ukr: "o + pisati = opisati (описати)", eng: ""},
-        {ukr: "v + pisati = vpisati (зарахувати, записати)", eng: ""},
-        {ukr: "od + pisati = odpisati (відповісти на лист)", eng: ""},
-        {ukr: "po + pisati = popisati (провести інвентаризацію)", eng: ""},
-        {ukr: "pre + pisati = prepisati (скопіювати)", eng: ""},
-        {ukr: "pred + pisati = predpisati (прописувати)", eng: ""},
-        {ukr: "pri + pisati = pripisati (зробити примітку)", eng: ""},
-        {ukr: "za + pisati = zapisati (записати)", eng: ""}
+    {exampleUkr: "Pisati (писати)", exampleEng: "Pisati (to write)",  cases: [
+        {ukr: "do + pisati = dopisati (дописати)", eng: "do + pisati = dopisati (to correspond)"},
+        {ukr: "iz + pisati = izpisati (виписувати)", eng: "iz + pisati = izpisati (write out)"},
+        {ukr: "na + pisati = napisati (написати)", eng: "na + pisati = napisati (to write down)"},
+        {ukr: "pod + pisati = podpisati (підписати)", eng: "pod + pisati = podpisati (to sign)"},
+        {ukr: "o + pisati = opisati (описати)", eng: "o + pisati = opisati (to describe)"},
+        {ukr: "v + pisati = vpisati (зарахувати, записати)", eng: "v + pisati = vpisati (to enrol)"},
+        {ukr: "od + pisati = odpisati (відповісти на лист)", eng: "od + pisati = odpisati (to write off)"},
+        {ukr: "po + pisati = popisati (провести інвентаризацію)", eng: "po + pisati = popisati (to list)"},
+        {ukr: "pre + pisati = prepisati (скопіювати)", eng: "pre + pisati = prepisati (to rewrite)"},
+        {ukr: "pred + pisati = predpisati (прописувати)", eng: "pred + pisati = predpisati (to prescribe)"},
+        {ukr: "pri + pisati = pripisati (зробити примітку)", eng: "pri + pisati = pripisati (to attribute)"},
+        {ukr: "za + pisati = zapisati (записати)", eng: "za + pisati = zapisati (to note)"}
     ] }, 
-    {exampleUkr: "Brati (читати)", exampleEng: "",  cases: [
-        {ukr: "iz + brati = izbrati (обирати)", eng: ""},
-        {ukr: "na + brati = nabrati (збирати)", eng: ""},
-        {ukr: "o + brati = obrati (вибрати)", eng: ""},
-        {ukr: "po + brati = pobrati (підібрати)", eng: ""},
-        {ukr: "pre + brati = prebrati (прочитати)", eng: ""},
-        {ukr: "raz + brati = razbrati (робити висновок)", eng: ""}
+    {exampleUkr: "Brati (читати)", exampleEng: "Brati (to read)",  cases: [
+        {ukr: "iz + brati = izbrati (обирати)", eng: "iz + brati = izbrati (to choose)"},
+        {ukr: "na + brati = nabrati (збирати)", eng: "na + brati = nabrati (to accumulate)"},
+        {ukr: "o + brati = obrati (вибрати)", eng: "o + brati = obrati (pitch upon)"},
+        {ukr: "po + brati = pobrati (підібрати)", eng: "po + brati = pobrati (pick up)"},
+        {ukr: "pre + brati = prebrati (прочитати)", eng: "pre + brati = prebrati (to read)"},
+        {ukr: "raz + brati = razbrati (робити висновок)", eng: "raz + brati = razbrati (to figure out)"}
     ] }, 
-    {exampleUkr: "Pustiti (залишити, дозволити)", exampleEng: "",  cases: [
-        {ukr: "do + pustiti = dopustiti (допускати)", eng: ""},
-        {ukr: "iz + pustiti = izpustiti (відпустити)", eng: ""},
-        {ukr: "o + pustiti = opustiti (відмовитися від)", eng: ""},
-        {ukr: "od + pustiti = odpustiti (пробачити)", eng: ""},
-        {ukr: "po + pustiti = popustiti (розслабитися)", eng: ""},
-        {ukr: "pre + pustiti = prepustiti (залишити, відпустити)", eng: ""},
-        {ukr: "raz + pustiti = razpustiti (розчинятися)", eng: ""},
-        {ukr: "s + pustiti = spustiti (розпускати, відпустити)", eng: ""},
-        {ukr: "za + pustiti = zapustiti (залишити, відмовитися від)", eng: ""}
+    {exampleUkr: "Pustiti (залишити, дозволити)", exampleEng: "Pustiti (Let go)",  cases: [
+        {ukr: "do + pustiti = dopustiti (допускати)", eng: "do + pustiti = dopustiti (to allow)"},
+        {ukr: "iz + pustiti = izpustiti (відпустити)", eng: "iz + pustiti = izpustiti (to release)"},
+        {ukr: "o + pustiti = opustiti (відмовитися від)", eng: "o + pustiti = opustiti (give up)"},
+        {ukr: "od + pustiti = odpustiti (пробачити)", eng: "od + pustiti = odpustiti (to forgive)"},
+        {ukr: "po + pustiti = popustiti (розслабитися)", eng: "po + pustiti = popustiti (give way)"},
+        {ukr: "pre + pustiti = prepustiti (залишити, відпустити)", eng: "pre + pustiti = prepustiti (to let go)"},
+        {ukr: "raz + pustiti = razpustiti (розчинятися)", eng: "raz + pustiti = razpustiti (dissolve)"},
+        {ukr: "s + pustiti = spustiti (розпускати, відпустити)", eng: "s + pustiti = spustiti (let down)"},
+        {ukr: "za + pustiti = zapustiti (залишити, відмовитися від)", eng: "za + pustiti = zapustiti (to leave)"}
     ] }, 
-    {exampleUkr: "Govoriti (говорити)", exampleEng: "",  cases: [
-        {ukr: "do + govoriti = dogovoriti se (домовитися)", eng: ""},
-        {ukr: "iz + govoriti = izgovoriti (вимовляти)", eng: ""},
-        {ukr: "na + govoriti = nagovoriti (адресувати)", eng: ""},
-        {ukr: "od + govoriti = odgovoriti (відповісти)", eng: ""},
-        {ukr: "po + govoriti = pogovoriti se (розмовляти))", eng: ""},
-        {ukr: "pre + govoriti = pregovoriti (переконувати, умовити)", eng: ""},
-        {ukr: "od + pisati = odpisati (відповісти на лист)", eng: ""},
-        {ukr: "po + pisati = popisati (провести інвентаризацію)", eng: ""},
-        {ukr: "pre + pisati = prepisati (скопіювати)", eng: ""},
-        {ukr: "pred + pisati = predpisati (прописувати)", eng: ""},
-        {ukr: "pri + pisati = pripisati (зробити примітку)", eng: ""},
-        {ukr: "za + pisati = zapisati (записати)", eng: ""},
+    {exampleUkr: "Govoriti (говорити)", exampleEng: "Govoriti (to speak)",  cases: [
+        {ukr: "do + govoriti = dogovoriti se (домовитися)", eng: "do + govoriti = dogovoriti se (agree)"},
+        {ukr: "iz + govoriti = izgovoriti (вимовляти)", eng: "iz + govoriti = izgovoriti (pronounce)"},
+        {ukr: "na + govoriti = nagovoriti (адресувати)", eng: "na + govoriti = nagovoriti (to address)"},
+        {ukr: "od + govoriti = odgovoriti (відповісти)", eng: "od + govoriti = odgovoriti (to answer)"},
+        {ukr: "po + govoriti = pogovoriti se (розмовляти)", eng: "po + govoriti = pogovoriti se (to talk)"},
+        {ukr: "pre + govoriti = pregovoriti (переконувати, умовити)", eng: "pre + govoriti = pregovoriti (to persuade)"},
     ] }, 
-    {exampleUkr: "Nesti (нести)", exampleEng: "",  cases: [
-        {ukr: "na + nesti = nanesti (застосовувати)", eng: ""},
-        {ukr: "ob + nesti = obnesti se (бути ефективним)", eng: ""},
-        {ukr: "od + nesti = odnesti (проводити, виконати)", eng: ""},
-        {ukr: "pre + nesti = prenesti (передати)", eng: ""},
-        {ukr: "pri + nesti = prinesti (принести)", eng: ""},
-        {ukr: "v + nesti = vnesti (заходити, вставити)", eng: ""},
-        {ukr: "za + nesti = zanesti (відносити)", eng: ""}
+    {exampleUkr: "Nesti (нести)", exampleEng: "Nesti (To lay)",  cases: [
+        {ukr: "na + nesti = nanesti (застосовувати)", eng: "na + nesti = nanesti (to apply)"},
+        {ukr: "ob + nesti = obnesti se (бути ефективним)", eng: "ob + nesti = obnesti se (behave)"},
+        {ukr: "od + nesti = odnesti (проводити, виконати)", eng: "od + nesti = odnesti (take away)"},
+        {ukr: "pre + nesti = prenesti (передати)", eng: "pre + nesti = prenesti (to transfer)"},
+        {ukr: "pri + nesti = prinesti (принести)", eng: "pri + nesti = prinesti (to bring)"},
+        {ukr: "v + nesti = vnesti (заходити, вставити)", eng: "v + nesti = vnesti (input)"},
+        {ukr: "za + nesti = zanesti (відносити)", eng: "za + nesti = zanesti (get carried away)"}
     ] }
  ]
 
  export const beAndHaveRules: IBeAndHaveRules = {
     head: {
         ukr: ["", "BITI (Бути)", "Негативна форма", "IMETI (Мати)", "Негативна форма"],
-        eng: ["","BITI (Бути)", "", ", "]
+        eng: ["","BITI (To be)", "Negative form", "IMETI (To have)", "Negative form"]
     },
     body: [
         ["Jaz", "sem", "nisem", "imam", "nimam"], 
@@ -210,3 +228,5 @@ export const verbDeclension: string[][] = [
       ["Vi, Ve", "bosta" , "ne boste"],
       ["Oni, One", "bojo, bodo" , "ne bojo, ne bodo"],
  ]
+
+

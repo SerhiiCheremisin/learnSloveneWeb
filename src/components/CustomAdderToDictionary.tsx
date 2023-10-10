@@ -7,6 +7,7 @@ import { addWordToDictionatyToDB } from '../utils/API';
 import useGetUserDictionary from '../services/hooks/useGetUserDictionary';
 import useCommonDispatch from '../services/hooks/useCommonDispatch';
 import useGetUserData from '../services/hooks/useGetUserData';
+import useGetAppLanguage from '../services/hooks/useGetAppLanguage';
 
 interface ICustomAdderToDictionaryProps {
    singleWord: IRootDictionary
@@ -18,6 +19,7 @@ const CustomAdderToDictionary = ( { singleWord } :ICustomAdderToDictionaryProps 
   const dictionary = useGetUserDictionary();
   const user = useGetUserData();
   const dispatch = useCommonDispatch();
+  const appLanguage = useGetAppLanguage();
 
    useEffect( () => {
     dictionary.userDictionary.map( (word : IRootDictionary) => {
@@ -48,11 +50,11 @@ const CustomAdderToDictionary = ( { singleWord } :ICustomAdderToDictionaryProps 
   }
 
     if (isInDictionary) {
-        return <Button onClick={() => wordAdderHandler("delete")} variant="contained" color="error">Видалити з мого словника</Button>
+        return <Button onClick={() => wordAdderHandler("delete")} variant="contained" color="error">
+                               {appLanguage === "UA" ? "Видалити з мого словника" : "Delete from my dictionary"}</Button>
     }
-
-    return <Button onClick={() => wordAdderHandler("add")} variant="contained" color="success">Додати до мого словника</Button>
-  
+    return <Button onClick={() => wordAdderHandler("add")} variant="contained" color="success">
+                           {appLanguage === "UA" ? "Додати до мого словника" : "Add to my dictionary"}</Button>
 }
 
 
